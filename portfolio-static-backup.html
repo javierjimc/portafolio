@@ -1,0 +1,435 @@
+<title>Javier Mariscal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+/>
+
+<style>
+  /* ---------- Design tokens: LIGHT (bare :root) ---------- */
+  :root {
+    --bg: #f6f6f2;
+    --surface: #ffffff;
+    --surface-2: #efeee8;
+    --ink: #191c22;
+    --text: #2c313b;
+    --muted: #656c79;
+    --border: #e3e1d8;
+    --accent: #b45309;      /* ámbar oscuro: buen contraste sobre claro */
+    --accent-2: #92400e;
+    --accent-bg: rgba(180, 83, 9, 0.10);
+    --ring: rgba(180, 83, 9, 0.45);
+    --shadow: 0 1px 2px rgba(25, 28, 34, 0.04), 0 8px 28px rgba(25, 28, 34, 0.07);
+    --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --display: "Bricolage Grotesque", var(--sans);
+  }
+  /* ---------- Dark via OS (only when no explicit light choice) ---------- */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #13151a;
+      --surface: #1a1d24;
+      --surface-2: #222630;
+      --ink: #f3f3ef;
+      --text: #d7dae1;
+      --muted: #969ca8;
+      --border: #2b303a;
+      --accent: #f59e0b;    /* ámbar brillante sobre oscuro */
+      --accent-2: #fbbf24;
+      --accent-bg: rgba(245, 158, 11, 0.13);
+      --ring: rgba(245, 158, 11, 0.5);
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+  }
+  /* ---------- Dark via explicit toggle ---------- */
+  :root[data-theme="dark"] {
+    --bg: #13151a;
+    --surface: #1a1d24;
+    --surface-2: #222630;
+    --ink: #f3f3ef;
+    --text: #d7dae1;
+    --muted: #969ca8;
+    --border: #2b303a;
+    --accent: #f59e0b;
+    --accent-2: #fbbf24;
+    --accent-bg: rgba(245, 158, 11, 0.13);
+    --ring: rgba(245, 158, 11, 0.5);
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 30px rgba(0, 0, 0, 0.4);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: var(--display); color: var(--ink); text-wrap: balance; line-height: 1.1; margin: 0; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  :focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; border-radius: 4px; }
+
+  .wrap { max-width: 1040px; margin: 0 auto; padding-inline: 22px; }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-inner { display: flex; align-items: center; gap: 18px; height: 60px; }
+  .brand { font-family: var(--display); font-weight: 800; color: var(--ink); font-size: 17px; letter-spacing: -0.02em; }
+  .brand .dot { color: var(--accent); }
+  .nav-links { display: flex; gap: 20px; margin-left: auto; }
+  .nav-links a { color: var(--muted); font-size: 14px; font-weight: 500; }
+  .nav-links a:hover { color: var(--ink); text-decoration: none; }
+  .toggle {
+    display: inline-grid; place-items: center; width: 38px; height: 38px;
+    border: 1px solid var(--border); border-radius: 10px; background: var(--surface);
+    color: var(--ink); cursor: pointer; font-size: 16px;
+  }
+  .toggle:hover { border-color: var(--accent); }
+  @media (max-width: 640px) { .nav-links { display: none; } }
+
+  /* ---------- Section scaffolding ---------- */
+  section { padding-block: 68px; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--accent); margin: 0 0 12px;
+  }
+  .section-title { font-size: clamp(26px, 4vw, 34px); font-weight: 700; letter-spacing: -0.02em; }
+  .lead { color: var(--muted); max-width: 62ch; }
+
+  /* ---------- Hero ---------- */
+  .hero { padding-block: 72px 40px; }
+  .hero h1 { font-size: clamp(40px, 8vw, 72px); font-weight: 800; letter-spacing: -0.03em; }
+  .hero .role { font-family: var(--mono); color: var(--accent); font-size: 14px; letter-spacing: 0.04em; margin-bottom: 22px; }
+  .hero p.pitch { font-size: clamp(17px, 2.4vw, 20px); color: var(--text); max-width: 60ch; margin: 20px 0 0; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px; border: 1px solid var(--border); border-radius: 999px;
+    background: var(--surface); color: var(--text); font-size: 14px; font-weight: 500;
+  }
+  .chip:hover { border-color: var(--accent); color: var(--ink); text-decoration: none; }
+  .chip svg { width: 15px; height: 15px; }
+
+  /* ---------- Skills ---------- */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-top: 26px; }
+  .skill-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px; box-shadow: var(--shadow); }
+  .skill-card h3 { font-size: 15px; font-family: var(--sans); font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag { font-family: var(--mono); font-size: 12.5px; padding: 4px 9px; border-radius: 7px; background: var(--surface-2); color: var(--text); border: 1px solid var(--border); }
+
+  /* ---------- Projects ---------- */
+  .proj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-top: 26px; }
+  .proj {
+    display: flex; flex-direction: column; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: var(--shadow);
+  }
+  .proj .kind { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+  .proj h3 { font-size: 20px; font-weight: 700; margin: 8px 0 10px; letter-spacing: -0.01em; }
+  .proj p { color: var(--muted); font-size: 14.5px; margin: 0 0 16px; }
+  .proj .tags { margin-top: auto; margin-bottom: 16px; }
+  .proj .links { display: flex; gap: 16px; font-size: 14px; font-weight: 500; }
+  .proj .links a { display: inline-flex; align-items: center; gap: 6px; }
+  .proj .links svg { width: 15px; height: 15px; }
+
+  /* ---------- Case study ---------- */
+  .case {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+    box-shadow: var(--shadow); overflow: hidden; margin-top: 26px;
+  }
+  .case-head { padding: 30px 30px 26px; border-bottom: 1px solid var(--border); background: var(--accent-bg); }
+  .case-head .badge { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-2); }
+  .case-head h3 { font-size: clamp(22px, 3.5vw, 28px); font-weight: 800; letter-spacing: -0.02em; margin: 10px 0 0; }
+  .case-body { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; }
+  .case-item { padding: 22px 30px; border-bottom: 1px solid var(--border); }
+  .case-item:nth-child(odd) { border-right: 1px solid var(--border); }
+  .case-item.full { grid-column: 1 / -1; }
+  .case-item h4 {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); margin: 0 0 8px; font-weight: 500;
+  }
+  .case-item p { margin: 0; font-size: 15px; color: var(--text); }
+  .case-item ul { margin: 0; padding-left: 18px; }
+  .case-item li { font-size: 14.5px; margin-bottom: 5px; }
+  .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 14px; margin-top: 6px; }
+  .metric { border: 1px solid var(--border); border-radius: 12px; padding: 14px; background: var(--surface-2); }
+  .metric .n { font-family: var(--display); font-weight: 800; font-size: 26px; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .metric .l { font-size: 12.5px; color: var(--muted); line-height: 1.35; margin-top: 2px; }
+  @media (max-width: 620px) {
+    .case-body { grid-template-columns: 1fr; }
+    .case-item:nth-child(odd) { border-right: none; }
+  }
+
+  /* ---------- Contact ---------- */
+  .contact { border-top: 1px solid var(--border); background: var(--surface); }
+  .contact-inner { display: flex; flex-wrap: wrap; gap: 26px; align-items: center; justify-content: space-between; }
+  .contact h2 { font-size: clamp(24px, 4vw, 32px); }
+  .foot { color: var(--muted); font-size: 13px; padding-block: 24px 8px; }
+  .note { font-family: var(--mono); font-size: 12px; color: var(--muted); background: var(--surface-2); border: 1px dashed var(--border); border-radius: 8px; padding: 3px 8px; }
+</style>
+
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <span class="brand">Javier Mariscal<span class="dot">.</span></span>
+    <div class="nav-links">
+      <a href="#sobre">Sobre mí</a>
+      <a href="#skills">Skills</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#caso">Caso de estudio</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+    <button class="toggle" id="themeToggle" aria-label="Cambiar tema">🌙</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="role">Ingeniero de Ejecución en Informática · Desarrollador Full-Stack Jr.</p>
+    <h1>Javier Mariscal Cáceres</h1>
+    <p class="pitch">
+      Construyo aplicaciones web full-stack con <strong>React, TypeScript y Node.js</strong>,
+      cuidando la arquitectura, el código limpio y la experiencia de quien lo usa.
+      Titulado con distinción, con experiencia en el sector público y foco en el desarrollo backend.
+    </p>
+    <div class="chips">
+      <a class="chip" href="mailto:javiermariscal2446@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        javiermariscal2446@gmail.com
+      </a>
+      <a class="chip" href="tel:+56920045310">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2Z"/></svg>
+        +56 9 2004 5310
+      </a>
+      <a class="chip" href="https://github.com/javierjimc" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+        github.com/javierjimc
+      </a>
+      <a class="chip" href="https://www.linkedin.com/in/javier-mariscal-359364302/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3 9h4v12H3V9Zm6 0h3.8v1.64h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21H9V9Z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="sobre">
+    <div class="wrap">
+      <p class="eyebrow">Sobre mí</p>
+      <h2 class="section-title">Perfil profesional</h2>
+      <p class="lead" style="margin-top:16px">
+        Ingeniero de Ejecución en Informática titulado con distinción en AIEP, con mención en
+        Desarrollo de Sistemas y formación previa como Técnico en Programación y Análisis de Sistemas.
+        Tengo experiencia en el ámbito público (Municipalidad de San Fernando) en mantenimiento,
+        soporte y análisis de plataformas, además de conocimientos sólidos en desarrollo web frontend
+        y backend. Soy metódico, con capacidad analítica para el levantamiento de requerimientos y la
+        resolución de incidencias, y con habilidades de comunicación forjadas en atención al cliente y
+        trabajo colaborativo.
+      </p>
+    </div>
+  </section>
+
+  <section id="skills" style="background:var(--surface-2)">
+    <div class="wrap">
+      <p class="eyebrow">Stack técnico</p>
+      <h2 class="section-title">Habilidades</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>Frontend &amp; UI</h3>
+          <div class="tags">
+            <span class="tag">React</span><span class="tag">JavaScript (ES6+)</span>
+            <span class="tag">TypeScript</span><span class="tag">Tailwind CSS</span>
+            <span class="tag">HTML5</span><span class="tag">CSS3</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Backend</h3>
+          <div class="tags">
+            <span class="tag">Node.js</span><span class="tag">Express</span>
+            <span class="tag">NestJS</span><span class="tag">Sequelize</span>
+            <span class="tag">Prisma</span><span class="tag">API REST</span><span class="tag">POO</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Bases de datos</h3>
+          <div class="tags">
+            <span class="tag">PostgreSQL</span><span class="tag">Neon</span>
+            <span class="tag">SQL</span><span class="tag">Modelado relacional</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <h3>Herramientas &amp; otros</h3>
+          <div class="tags">
+            <span class="tag">Git</span><span class="tag">GitHub</span>
+            <span class="tag">JWT</span><span class="tag">Redes y soporte</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="proyectos">
+    <div class="wrap">
+      <p class="eyebrow">Trabajo</p>
+      <h2 class="section-title">Proyectos destacados</h2>
+      <p class="lead" style="margin-top:14px">Tres proyectos desarrollados durante mi formación, de frontend a backend con base de datos.</p>
+      <div class="proj-grid">
+        <article class="proj">
+          <span class="kind">Backend · API REST</span>
+          <h3>API RESTful con Node.js, Express &amp; Neon</h3>
+          <p>API modular para gestión de usuarios y tareas: relaciones 1:1, 1:N y N:M con Sequelize, CRUD completo, búsquedas filtradas, validaciones y manejo de errores. Desplegada sobre PostgreSQL en Neon.</p>
+          <div class="tags">
+            <span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">Sequelize</span>
+            <span class="tag">PostgreSQL/Neon</span><span class="tag">JWT-ready</span>
+          </div>
+          <div class="links">
+            <a href="https://github.com/javierjimc/entrega-6" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+              Ver repositorio
+            </a>
+            <a href="#caso">Caso de estudio ↓</a>
+          </div>
+        </article>
+
+        <article class="proj">
+          <span class="kind">Frontend + SQL · Grupal (ABP)</span>
+          <h3>AlkeWallet — Banco Digital</h3>
+          <p>Interfaz web de billetera digital: login, depósitos, retiros, envío de dinero y listado de transacciones. Incluye el diseño del modelo de base de datos relacional en SQL. Proyecto grupal desarrollado con metodología ABP.</p>
+          <div class="tags">
+            <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">SQL</span>
+          </div>
+          <div class="links">
+            <a href="https://github.com/javierjimc" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+              Ver en GitHub
+            </a>
+          </div>
+        </article>
+
+        <article class="proj">
+          <span class="kind">Frontend · JavaScript</span>
+          <h3>Portal Escolar — CRUD de Estudiantes</h3>
+          <p>Sistema de gestión escolar (CRUD) para registrar estudiantes, calcular promedios y evaluar su estado (aprobado/reprobado). Persistencia en LocalStorage y renderizado dinámico del DOM con JavaScript puro.</p>
+          <div class="tags">
+            <span class="tag">JavaScript (ES6+)</span><span class="tag">DOM</span><span class="tag">LocalStorage</span>
+          </div>
+          <div class="links">
+            <a href="https://github.com/javierjimc" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+              Ver en GitHub
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="caso" style="background:var(--surface-2)">
+    <div class="wrap">
+      <p class="eyebrow">Proyecto representativo</p>
+      <h2 class="section-title">Caso de estudio</h2>
+      <div class="case">
+        <div class="case-head">
+          <span class="badge">Backend · Node.js · PostgreSQL (Neon)</span>
+          <h3>API RESTful segura para gestión de usuarios y datos</h3>
+        </div>
+        <div class="case-body">
+          <div class="case-item full">
+            <h4>Descripción</h4>
+            <p>Diseño y construcción de una API RESTful para gestionar usuarios y tareas, como parte del proyecto integrador de backend. Servidor Express con arquitectura modular (rutas → controladores → servicios → modelos) y persistencia real en PostgreSQL sobre Neon mediante el ORM Sequelize.</p>
+          </div>
+          <div class="case-item">
+            <h4>Desafío principal</h4>
+            <p>Pasar de un servidor con archivos planos a una arquitectura profesional con base de datos en la nube: modelar tres tipos de relación (1:1, 1:N, N:M), conectar de forma segura a Neon con SSL y mantener respuestas consistentes sin romper la API ante errores o datos inválidos.</p>
+          </div>
+          <div class="case-item">
+            <h4>Solución propuesta</h4>
+            <p>Arquitectura por capas + Sequelize con asociaciones; validación en dos niveles (express-validator en las rutas y validaciones de modelo); un middleware central que traduce los errores de Sequelize a códigos claros (400 / 404 / 409 / 500), y un formato de respuesta uniforme <code>{ status, message, data }</code>.</p>
+          </div>
+          <div class="case-item">
+            <h4>Herramienta técnica utilizada</h4>
+            <p>Node.js + Express, <strong>Sequelize</strong> como ORM, <strong>PostgreSQL sobre Neon</strong> (serverless), express-validator, dotenv y nodemon. Control de versiones con Git y GitHub.</p>
+          </div>
+          <div class="case-item">
+            <h4>Habilidades técnicas aplicadas</h4>
+            <p>Diseño de APIs REST, modelado relacional con ORM, manejo de errores y validación, arquitectura modular, conexión segura a servicios en la nube y buenas prácticas con Git.</p>
+          </div>
+          <div class="case-item full">
+            <h4>Principales aprendizajes</h4>
+            <ul>
+              <li>Modelar relaciones (1:1, 1:N, N:M) y resolverlas con un ORM en vez de SQL manual.</li>
+              <li>Separar responsabilidades por capas hace el código testeable y escalable.</li>
+              <li>Centralizar el manejo de errores mejora la consistencia y la experiencia de quien consume la API.</li>
+              <li>Conectar de forma segura (SSL + variables de entorno) y no exponer credenciales en el repositorio.</li>
+            </ul>
+          </div>
+          <div class="case-item full">
+            <h4>Métricas de impacto</h4>
+            <div class="metrics">
+              <div class="metric"><div class="n">14</div><div class="l">endpoints probados en vivo contra Neon</div></div>
+              <div class="metric"><div class="n">3</div><div class="l">tipos de relación (1:1, 1:N, N:M)</div></div>
+              <div class="metric"><div class="n">4</div><div class="l">modelos con asociaciones</div></div>
+              <div class="metric"><div class="n">100%</div><div class="l">respuestas con formato consistente</div></div>
+              <div class="metric"><div class="n">0</div><div class="l">credenciales expuestas en el repo</div></div>
+            </div>
+          </div>
+          <div class="case-item full">
+            <h4>Por qué elegí este proyecto</h4>
+            <p>Es el proyecto donde di el salto de “hacer que funcione” a “diseñar para escalar”: pensar la arquitectura, las relaciones de datos y la seguridad. Representa mi crecimiento hacia el desarrollo backend profesional y deja una base lista para sumar autenticación con JWT y subida de archivos.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="contact">
+    <div class="wrap contact-inner">
+      <div>
+        <p class="eyebrow">Hablemos</p>
+        <h2>¿Construimos algo juntos?</h2>
+        <p class="lead" style="margin-top:10px">Disponible para oportunidades trainee / junior en desarrollo full-stack o backend. Modalidad remota.</p>
+      </div>
+      <div class="chips" style="margin-top:0">
+        <a class="chip" href="mailto:javiermariscal2446@gmail.com">✉️ Escribirme</a>
+        <a class="chip" href="https://github.com/javierjimc" target="_blank" rel="noopener">GitHub</a>
+        <a class="chip" href="https://www.linkedin.com/in/javier-mariscal-359364302/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+    <div class="wrap foot">
+      © 2026 Javier Mariscal Cáceres · San Fernando, Chile
+    </div>
+  </section>
+</main>
+
+<script>
+  // Tema: respeta la preferencia guardada; el botón alterna claro/oscuro.
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById("themeToggle");
+    var stored;
+    try { stored = localStorage.getItem("theme"); } catch (e) {}
+    if (stored === "dark" || stored === "light") root.setAttribute("data-theme", stored);
+
+    function isDark() {
+      var t = root.getAttribute("data-theme");
+      if (t) return t === "dark";
+      return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+    function paint() { btn.textContent = isDark() ? "☀️" : "🌙"; }
+    paint();
+    btn.addEventListener("click", function () {
+      var next = isDark() ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("theme", next); } catch (e) {}
+      paint();
+    });
+  })();
+</script>
